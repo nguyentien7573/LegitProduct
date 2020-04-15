@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soulution items", "Soulutio
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegitProduct.Data", "LegitProduct.Data\LegitProduct.Data.csproj", "{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegitProduct.ApplicationLogic", "LegitProduct.ApplicationLogic\LegitProduct.ApplicationLogic.csproj", "{3A61EA0C-BC4B-40F8-9C02-424836D10206}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{EB5CE51B-F6DE-4FF4-80CD-96862D110992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB5CE51B-F6DE-4FF4-80CD-96862D110992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB5CE51B-F6DE-4FF4-80CD-96862D110992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

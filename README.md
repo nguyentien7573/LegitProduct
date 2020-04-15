@@ -1,4 +1,4 @@
-﻿# ứng dụng liên kết các cửa hàng kinh doanh
+﻿# The app links the business store
 ## Technologies
 - ASP.NET Core 3.1
 - Entity Framework Core 3.1

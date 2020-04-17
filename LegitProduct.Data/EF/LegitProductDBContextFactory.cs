@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LegitProduct.Data.EF
 {
-    class LegitProductContextFactory : IDesignTimeDbContextFactory<LegitProductDBContext>
+    class LegitProductDBContextFactory : IDesignTimeDbContextFactory<LegitProductDBContext>
     {
         public LegitProductDBContext CreateDbContext(string[] args)
         {

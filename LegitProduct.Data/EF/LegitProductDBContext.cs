@@ -41,8 +41,7 @@ namespace LegitProduct.Data.EF
 
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
-           
-            base.OnModelCreating(modelBuilder);
+
         }
 
         public DbSet<Product> Products { get; set; }

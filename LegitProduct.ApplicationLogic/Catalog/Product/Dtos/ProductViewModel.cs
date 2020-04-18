@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LegitProduct.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LegitProduct.Data.Entities
+namespace LegitProduct.ApplicationLogic.Catalog.Product.Dtos
 {
-    public class Product
+    public class ProductViewModel
     {
         public int Id { set; get; }
         public string Name { get; set; }

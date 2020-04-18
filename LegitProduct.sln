@@ -3,16 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegitProduct.WebApplication", "LegitProduct.WebApplication\LegitProduct.WebApplication.csproj", "{EB5CE51B-F6DE-4FF4-80CD-96862D110992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegitProduct.WebApplication", "LegitProduct.WebApplication\LegitProduct.WebApplication.csproj", "{EB5CE51B-F6DE-4FF4-80CD-96862D110992}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Soulution items", "Soulution items", "{A3038D75-35D8-421F-89BB-E231EB80EFCD}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegitProduct.Data", "LegitProduct.Data\LegitProduct.Data.csproj", "{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegitProduct.Data", "LegitProduct.Data\LegitProduct.Data.csproj", "{DDEB0970-61C0-4C83-B07F-74C4DFD5CF35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegitProduct.ApplicationLogic", "LegitProduct.ApplicationLogic\LegitProduct.ApplicationLogic.csproj", "{3A61EA0C-BC4B-40F8-9C02-424836D10206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegitProduct.ApplicationLogic", "LegitProduct.ApplicationLogic\LegitProduct.ApplicationLogic.csproj", "{3A61EA0C-BC4B-40F8-9C02-424836D10206}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{F7DBE5C9-9076-4C18-846B-0D92B33E564C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A61EA0C-BC4B-40F8-9C02-424836D10206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

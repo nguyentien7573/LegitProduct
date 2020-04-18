@@ -20,7 +20,6 @@ namespace LegitProduct.Data.Entities
         public string StoreAdress { get; set; }
         public List<Order> Orders { get; set; }
         public List<Transaction> Transactions { get; set; }
-
-       
+        public List<Product> Products { get; set; }
     }
 }

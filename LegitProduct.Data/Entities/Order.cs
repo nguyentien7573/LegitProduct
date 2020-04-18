@@ -15,12 +15,7 @@ namespace LegitProduct.Data.Entities
         public string Email { set; get; }
         public string PhoneNumber { set; get; }
         public OrderStatus Status { set; get; }
-
         public List<OrderDetail> OrderDetails { get; set; }
-
-        public AppUser AppUser
-        {
-            get; set;
-        }
+        public AppUser AppUser{get; set;}
     }
 }

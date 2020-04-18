@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LegitProduct.Data.Migrations
 {
     [DbContext(typeof(LegitProductDBContext))]
-    [Migration("20200417083859_Initial")]
-    partial class Initial
+    [Migration("20200418133815_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -252,10 +252,19 @@ namespace LegitProduct.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<Guid?>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 4, 17, 15, 38, 59, 418, DateTimeKind.Local).AddTicks(405));
+                        .HasDefaultValue(new DateTime(2020, 4, 18, 20, 38, 14, 745, DateTimeKind.Local).AddTicks(280));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -266,6 +275,8 @@ namespace LegitProduct.Data.Migrations
                         .HasDefaultValue(0);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Products");
                 });
@@ -517,6 +528,13 @@ namespace LegitProduct.Data.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Product", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Products")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.ProductImage", b =>

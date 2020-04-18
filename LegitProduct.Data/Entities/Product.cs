@@ -7,6 +7,7 @@ namespace LegitProduct.Data.Entities
     public class Product
     {
         public int Id { set; get; }
+        public string Name { get; set; }
         public decimal Price { set; get; }
         public int ViewCount { set; get; }
         public DateTime DateCreated { set; get; }

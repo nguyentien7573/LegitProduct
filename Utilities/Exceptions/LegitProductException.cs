@@ -19,4 +19,5 @@ namespace Utilities.Exceptions
             : base(message, inner)
         {
         }
+    }
 }

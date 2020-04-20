@@ -14,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegitProduct.Data", "LegitP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegitProduct.ApplicationLogic", "LegitProduct.ApplicationLogic\LegitProduct.ApplicationLogic.csproj", "{3A61EA0C-BC4B-40F8-9C02-424836D10206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{F7DBE5C9-9076-4C18-846B-0D92B33E564C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{F7DBE5C9-9076-4C18-846B-0D92B33E564C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd", "BackEnd\BackEnd.csproj", "{96693A4F-C248-43F7-B1B6-618783D46824}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7DBE5C9-9076-4C18-846B-0D92B33E564C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96693A4F-C248-43F7-B1B6-618783D46824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96693A4F-C248-43F7-B1B6-618783D46824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96693A4F-C248-43F7-B1B6-618783D46824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96693A4F-C248-43F7-B1B6-618783D46824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

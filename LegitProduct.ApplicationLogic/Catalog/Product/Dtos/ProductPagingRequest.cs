@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LegitProduct.ApplicationLogic.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LegitProduct.ApplicationLogic.Catalog.Product.Dtos
 {
-    public class ProductPagingRequest
+    public class ProductPagingRequest : PagingRequest
     {
         public string Keyword { get; set; }
 

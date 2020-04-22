@@ -10,7 +10,7 @@ using LegitProduct.Data.Entities;
 using LegitProduct.ApplicationLogic.Catalog.Product;
 using LegitProduct.ApplicationLogic.Catalog.Product.Dtos;
 using LegitProduct.ApplicationLogic.Common;
-using LegitProduct.ApplicationLogic.ProductImage;
+using LegitProduct.ApplicationLogic.Catalog.ProductImage;
 
 namespace BackEnd.Controllers
 {

@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LegitProduct.ApplicationLogic.ProductImage
+namespace LegitProduct.ApplicationLogic.Catalog.ProductImage
 {
-    public class ProductImageCreateRequest
+    public class ProductImageUpdateRequest
     {
+        public int Id { get; set; }
         public bool IsDefault { get; set; }
         public IFormFile ImageFile { get; set; }
     }

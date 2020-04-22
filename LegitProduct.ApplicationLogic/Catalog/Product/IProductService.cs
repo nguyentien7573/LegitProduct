@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using LegitProduct.ApplicationLogic.ProductImage;
+using LegitProduct.ApplicationLogic.Catalog.ProductImage;
 
 namespace LegitProduct.ApplicationLogic.Catalog.Product
 {

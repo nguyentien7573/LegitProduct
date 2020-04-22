@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Http;
-using LegitProduct.ApplicationLogic.ProductImage;
+using LegitProduct.ApplicationLogic.Catalog.ProductImage;
 
 namespace LegitProduct.ApplicationLogic.Catalog.Product
 {

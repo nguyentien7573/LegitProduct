@@ -11,6 +11,7 @@ using LegitProduct.ApplicationLogic.Catalog.Product;
 using LegitProduct.ApplicationLogic.Catalog.Product.Dtos;
 using LegitProduct.ApplicationLogic.Common;
 using LegitProduct.ApplicationLogic.Catalog.ProductImage;
+using LegitProduct.ApplicationLogic.Catalog.ProductImage.Dtos;
 
 namespace BackEnd.Controllers
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LegitProduct.ApplicationLogic.Catalog.ProductImage
+namespace LegitProduct.ApplicationLogic.Catalog.ProductImage.Dtos
 {
     public class ProductImageViewModel
     {

@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using LegitProduct.ApplicationLogic.Catalog.ProductImage;
+using LegitProduct.ApplicationLogic.Catalog.ProductImage.Dtos;
 
 namespace LegitProduct.ApplicationLogic.Catalog.Product
 {

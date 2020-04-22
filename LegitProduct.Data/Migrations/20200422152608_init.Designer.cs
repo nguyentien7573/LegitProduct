@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LegitProduct.Data.Migrations
 {
     [DbContext(typeof(LegitProductDBContext))]
-    [Migration("20200418133815_Init")]
-    partial class Init
+    [Migration("20200422152608_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,6 +161,10 @@ namespace LegitProduct.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
@@ -258,7 +262,7 @@ namespace LegitProduct.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 4, 18, 20, 38, 14, 745, DateTimeKind.Local).AddTicks(280));
+                        .HasDefaultValue(new DateTime(2020, 4, 22, 22, 26, 8, 271, DateTimeKind.Local).AddTicks(3681));
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");

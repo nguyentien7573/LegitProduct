@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LegitProduct.Data.Entities
+namespace LegitProduct.ApplicationLogic.Catalog.Category.Dtos
 {
-    public class Category
+    public class CategoryViewModel
     {
         public int Id { set; get; }
         public string Name { get; set; }
         public int? ParentId { set; get; }
         public Status Status { set; get; }
-        public List<Product_Category> Product_Category { get; set; }
     }
 }

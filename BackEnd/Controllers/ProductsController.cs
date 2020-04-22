@@ -27,7 +27,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet]
-        public async Task<PageResult<ProductViewModel>> Get(GetPublicProductPaging request)
+        public async Task<PageResult<ProductViewModel>> Get([FromQuery]GetPublicProductPaging request)
         {
             return await _productService.Get(request);
         }

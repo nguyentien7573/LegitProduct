@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LegitProduct.ApplicationLogic.Catalog.Category;
 using LegitProduct.ApplicationLogic.Catalog.Product;
 using LegitProduct.ApplicationLogic.Common;
 using LegitProduct.Data.EF;
@@ -35,8 +36,9 @@ namespace BackEnd
 
             //Declare DI
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IStorageService, FileStorageService>();
-
+          
             //Add MVC
             services.AddControllersWithViews();
 

@@ -82,7 +82,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Product
                     context.ProductImages.Update(thumbnailImage);
                 }
             }
-
+            context.Products.Update(product);
             return await context.SaveChangesAsync();
         }
         public async Task<int> Delete(int id)

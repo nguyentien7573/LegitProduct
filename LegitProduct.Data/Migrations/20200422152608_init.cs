@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LegitProduct.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -146,6 +146,7 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false),
                     ParentId = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: false, defaultValue: 0)
                 },
@@ -210,7 +211,7 @@ namespace LegitProduct.Data.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ViewCount = table.Column<int>(nullable: false, defaultValue: 0),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 4, 18, 20, 38, 14, 745, DateTimeKind.Local).AddTicks(280)),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 4, 22, 22, 26, 8, 271, DateTimeKind.Local).AddTicks(3681)),
                     AppUserId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>

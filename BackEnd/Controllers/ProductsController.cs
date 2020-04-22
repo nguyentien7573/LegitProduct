@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LegitProduct.Data.EF;
 using LegitProduct.Data.Entities;
+using LegitProduct.ApplicationLogic.Catalog.Product;
+using LegitProduct.ApplicationLogic.Catalog.Product.Dtos;
+using LegitProduct.ApplicationLogic.Common;
+using LegitProduct.ApplicationLogic.ProductImage;
 
 namespace BackEnd.Controllers
 {
@@ -14,97 +18,131 @@ namespace BackEnd.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly LegitProductDBContext _context;
+        private readonly IProductService _productService;
 
-        public ProductsController(LegitProductDBContext context)
+        public ProductsController(IProductService productService)
         {
-            _context = context;
+            _productService = productService;
         }
 
-        // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<PageResult<ProductViewModel>> Get(GetPublicProductPaging request)
         {
-            return await _context.Products.ToListAsync();
+            return await _productService.Get(request);
         }
 
-        // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _productService.GetByID(id);
 
             if (product == null)
             {
-                return NotFound();
+                return BadRequest("Product is not found");
             }
 
-            return product;
+            return Ok((product));
         }
-
-        // PUT: api/Products/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
-        {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(product).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Products
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+       
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Product>> Create([FromForm]ProductCreateRequest request)
         {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            var productId =  await _productService.Create(request);
+
+            if (productId == 0)
+                return BadRequest();
+
+            var product = await _productService.GetByID(productId);
+
+            return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
 
-        // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        public async Task<ActionResult<Product>> Delete(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            int result = await _productService.Delete(id);
+         
+            if (result == 0)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-
-            return product;
+            return Ok();
         }
 
-        private bool ProductExists(int id)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromForm]ProductUpdateRequest request)
         {
-            return _context.Products.Any(e => e.Id == id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var affectedResult = await _productService.Update(request);
+            if (affectedResult == 0)
+                return BadRequest();
+            return Ok();
         }
+
+        #region Image Function
+        [HttpGet("{productId}/images/{imageId}")]
+        public async Task<IActionResult> GetImageById(int imageId)
+        {
+            var image = await _productService.GetImageById(imageId);
+            if (image == null)
+                return BadRequest("Hình ảnh không được tìm thấy");
+            return Ok(image);
+        }
+
+       
+        [HttpPost("{productId}/images")]
+        public async Task<IActionResult> CreateImage(int productId, [FromForm]ProductImageCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var imageId = await _productService.AddImage(productId, request);
+            if (imageId == 0)
+                return BadRequest();
+
+            var image = await _productService.GetImageById(imageId);
+
+            return CreatedAtAction(nameof(GetImageById), new { id = imageId }, image);
+        }
+
+        [HttpPut("{productId}/images/{imageId}")]
+        public async Task<IActionResult> UpdateImage(int imageId, [FromForm]ProductImageUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.UpdateImage(imageId, request);
+            if (result == 0)
+                return BadRequest();
+
+            return Ok();
+        }
+
+        [HttpDelete("{productId}/images/{imageId}")]
+        public async Task<IActionResult> RemoveImage(int imageId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.RemoveImage(imageId);
+            if (result == 0)
+                return BadRequest();
+
+            return Ok();
+        }
+
+        #endregion
     }
 }

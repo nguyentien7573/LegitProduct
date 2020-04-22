@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using LegitProduct.ApplicationLogic.ProductImage;
 
 namespace LegitProduct.ApplicationLogic.Catalog.Product
 {
@@ -12,7 +13,12 @@ namespace LegitProduct.ApplicationLogic.Catalog.Product
         Task<int> Create(ProductCreateRequest request);
         Task<int> Update(ProductUpdateRequest request);
         Task<int> Delete(int id);
+        Task<PageResult<ProductViewModel>> Get(GetPublicProductPaging request);
         Task<ProductViewModel> GetByID(int productID);
-        Task<PageResult<ProductViewModel>> GetProductPaging(ProductPagingRequest request);
+        Task<int> AddImage(int productId, ProductImageCreateRequest request);
+        Task<int> RemoveImage(int imageId);
+        Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request);
+        Task<ProductImageViewModel> GetImageById(int imageId);
+        Task<PageResult<ProductImageViewModel>> GetListImages(int productId);
     }
 }

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LegitProduct.ApplicationLogic.Catalog.Product;
+using LegitProduct.ApplicationLogic.Common;
 using LegitProduct.Data.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +32,11 @@ namespace BackEnd
             // Add dbcontext
             services.AddDbContext<LegitProductDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString(SystemContants.MainConectionString)));
-           
+
+            //Declare DI
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IStorageService, FileStorageService>();
+
             //Add MVC
             services.AddControllersWithViews();
 

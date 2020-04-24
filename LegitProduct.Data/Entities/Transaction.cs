@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Transactions;
 
 namespace LegitProduct.Data.Entities
 {
-    public class Transaction
+    public partial class Transaction
     {
-        public int Id { set; get; }
-        public DateTime CreatedDate { set; get; }
-        public string ExternalTransactionId { set; get; }
-        public decimal Amount { set; get; }
-        public decimal Fee { set; get; }
-        public string Result { set; get; }
-        public string Message { set; get; }
-        public TransactionStatus Status { set; get; }
-        public string Provider { set; get; }
+        public int Id { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ExternalTransactionId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Fee { get; set; }
+        public string Result { get; set; }
+        public string Message { get; set; }
+        public int Status { get; set; }
+        public string Provider { get; set; }
         public Guid UserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public int IsDeleted { get; set; }
+        public string CreatedUserId { get; set; }
+        public DateTime? DateDeleted { get; set; }
+
+        public virtual AppUser User { get; set; }
     }
 }

@@ -10,17 +10,26 @@ namespace LegitProduct.Data.Configurations
 {
     public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<Category> entity)
         {
-            builder.ToTable("Categories");
+            entity.ToTable("Categories");
 
-            builder.HasKey(x => x.Id);
+            entity.Property(e => e.CreatedUserId)
+                   .IsRequired()
+                   .HasMaxLength(25)
+                   .HasDefaultValueSql("('')");
 
-            builder.Property(x => x.Name).IsRequired();
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
 
-            builder.Property(x => x.Status).HasDefaultValue(Status.Active);
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Name).HasMaxLength(250);
         }
     }
 }

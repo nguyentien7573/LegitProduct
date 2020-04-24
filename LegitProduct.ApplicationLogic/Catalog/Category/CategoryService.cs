@@ -9,6 +9,7 @@ using LegitProduct.Data.EF;
 using Utilities.Exceptions;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using LegitProduct.Data.ObjectEnums;
 
 namespace LegitProduct.ApplicationLogic.Catalog.Category
 {
@@ -26,7 +27,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Category
             var category = new Entities.Category()
             {
                 Name = request.Name,
-                Status = request.Status,
+                Status = (int)request.Status,
                 ParentId = request.ParentId
             };
 
@@ -63,7 +64,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Category
                 Id = category.Id,
                 Name = category.Name,
                 ParentId = category.ParentId,
-                Status = category.Status
+                Status = (Status)category.Status
             };
 
             return categoryViewModel;
@@ -84,7 +85,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Category
             {
                 Id = x.Id,
                 Name = x.Name,
-                Status = x.Status,
+                Status = (Status)x.Status,
                 ParentId = x.ParentId
             }).ToListAsync();
 
@@ -122,7 +123,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Category
                 Id = x.Id,
                 Name = x.Name,
                 ParentId = x.ParentId,
-                Status = x.Status
+                Status = (Status)x.Status
             }).ToList() ;
 
             var PageResult = new PageResult<CategoryViewModel>()
@@ -142,7 +143,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Category
 
             category.Name = request.Name;
             category.ParentId = request.ParentId;
-            category.Status = request.Status;
+            category.Status = (int)request.Status;
          
             context.Categories.Update(category);
 

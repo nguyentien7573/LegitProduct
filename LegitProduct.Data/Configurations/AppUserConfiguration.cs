@@ -9,14 +9,36 @@ namespace LegitProduct.Data.Configurations
 {
     public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
     {
-        public void Configure(EntityTypeBuilder<AppUser> builder)
+        public void Configure(EntityTypeBuilder<AppUser> entity)
         {
-            builder.ToTable("AppUsers");
-            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.LastName).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Dob).IsRequired();
-            builder.Property(x => x.Adress).IsRequired();
-            builder.Property(x => x.Email).IsRequired();
+            entity.ToTable("AppUsers");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.Property(e => e.CreatedUserId)
+                .IsRequired()
+                .HasMaxLength(25)
+                .HasDefaultValueSql("('')");
+
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
+
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Email).IsRequired();
+
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            entity.Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(255);
         }
     }
 }

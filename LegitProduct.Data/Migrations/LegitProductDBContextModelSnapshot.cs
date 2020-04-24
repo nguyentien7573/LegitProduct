@@ -24,6 +24,29 @@ namespace LegitProduct.Data.Migrations
                     b.Property<string>("Key")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -36,16 +59,38 @@ namespace LegitProduct.Data.Migrations
             modelBuilder.Entity("LegitProduct.Data.Entities.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -61,18 +106,33 @@ namespace LegitProduct.Data.Migrations
             modelBuilder.Entity("LegitProduct.Data.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
 
                     b.Property<DateTime>("Dob")
                         .HasColumnType("datetime2");
@@ -100,6 +160,9 @@ namespace LegitProduct.Data.Migrations
 
                     b.Property<string>("IdentityCard")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -133,12 +196,6 @@ namespace LegitProduct.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StoreAdress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StoreName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -150,30 +207,645 @@ namespace LegitProduct.Data.Migrations
                     b.ToTable("AppUsers");
                 });
 
+            modelBuilder.Entity("LegitProduct.Data.Entities.AppUserAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationDistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationVillageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationWardId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nchar(12)")
+                        .IsFixedLength(true)
+                        .HasMaxLength(12);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("LocationDistrictId");
+
+                    b.HasIndex("LocationProvinceId");
+
+                    b.HasIndex("LocationVillageId");
+
+                    b.HasIndex("LocationWardId");
+
+                    b.ToTable("AppUserAddresses");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.AppUserStore", b =>
+                {
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("StoreId", "AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("AppUser_Stores");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Attribute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Attributes");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.AttributeValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AttributeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributeId");
+
+                    b.ToTable("AttributeValues");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Branch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Branches");
+                });
+
             modelBuilder.Entity("LegitProduct.Data.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CreatedUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Collection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Desciption")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Collections");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.CollectionProduct", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "CollectionId");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("Collection_Products");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Favorite", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Favorites");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationDistrict", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationProvinceId");
+
+                    b.ToTable("LocationDistricts");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationProvince", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LocationProvinces");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationVillage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationWardId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationWardId");
+
+                    b.ToTable("LocationVillages");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationWard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationDistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationDistrictId");
+
+                    b.ToTable("LocationWards");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Log", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(30)")
+                        .HasMaxLength(30)
+                        .IsUnicode(false);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Desciption")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TableName")
+                        .HasColumnType("varchar(30)")
+                        .HasMaxLength(30)
+                        .IsUnicode(false);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.Order", b =>
@@ -181,14 +853,33 @@ namespace LegitProduct.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<int>("AppUserAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -196,13 +887,11 @@ namespace LegitProduct.Data.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(12)")
-                        .HasMaxLength(12);
 
                     b.Property<string>("ShipNameMethod")
                         .IsRequired()
@@ -210,16 +899,14 @@ namespace LegitProduct.Data.Migrations
                         .HasMaxLength(255);
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AppUserAddressId");
+
+                    b.HasIndex("AppUserId")
+                        .HasName("IX_Orders_UserId");
 
                     b.ToTable("Orders");
                 });
@@ -232,8 +919,34 @@ namespace LegitProduct.Data.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int?>("ProductPriceId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -242,7 +955,181 @@ namespace LegitProduct.Data.Migrations
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("ProductPriceId");
+
                     b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsActive")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PostContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("PostCategoryId");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.PostCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PostCategories");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.PostComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CommentContent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostComments");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.PostTag", b =>
+                {
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("TagId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Post_Tags");
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.Product", b =>
@@ -250,31 +1137,52 @@ namespace LegitProduct.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<Guid?>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 4, 22, 22, 26, 8, 271, DateTimeKind.Local).AddTicks(3681));
+                        .HasDefaultValueSql("('2020-04-18T20:38:14.7450280+07:00')");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsApprove")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StoreId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ViewCount")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -283,17 +1191,106 @@ namespace LegitProduct.Data.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("LegitProduct.Data.Entities.ProductBranch", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "BranchId");
+
+                    b.HasIndex("BranchId");
+
+                    b.ToTable("Product_Branches");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.ProductCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Product_Categories");
+                });
+
             modelBuilder.Entity("LegitProduct.Data.Entities.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
@@ -302,6 +1299,9 @@ namespace LegitProduct.Data.Migrations
 
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -313,19 +1313,60 @@ namespace LegitProduct.Data.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("LegitProduct.Data.Entities.Product_Category", b =>
+            modelBuilder.Entity("LegitProduct.Data.Entities.ProductPrice", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AttributeValueId1")
                         .HasColumnType("int");
+
+                    b.Property<int?>("AttributeValueId2")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 0)");
+
+                    b.Property<decimal>("PriceSell")
+                        .HasColumnType("decimal(18, 0)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoryId", "ProductId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributeValueId1");
+
+                    b.HasIndex("AttributeValueId2");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Product_Categories");
+                    b.ToTable("ProductPrices");
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.Promotion", b =>
@@ -333,30 +1374,42 @@ namespace LegitProduct.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("ApplyForAll")
-                        .HasColumnType("bit");
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
 
-                    b.Property<decimal?>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
 
-                    b.Property<int?>("DiscountPercent")
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<double?>("DiscountValue")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("DiscountValueType")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductCategoryIds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductIds")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -370,26 +1423,260 @@ namespace LegitProduct.Data.Migrations
                     b.ToTable("Promotions");
                 });
 
+            modelBuilder.Entity("LegitProduct.Data.Entities.PromotionProduct", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PromotionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId", "PromotionId");
+
+                    b.HasIndex("PromotionId");
+
+                    b.ToTable("Promotion_Products");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Rate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("text");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Rates");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Store", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("BusinessLicense")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IsLegit")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationDistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationProvinceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationVillageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationWardId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaxCode")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationDistrictId");
+
+                    b.HasIndex("LocationProvinceId");
+
+                    b.HasIndex("LocationVillageId");
+
+                    b.HasIndex("LocationWardId");
+
+                    b.ToTable("Stores");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
             modelBuilder.Entity("LegitProduct.Data.Entities.Transaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedUserId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(25)")
+                        .HasDefaultValueSql("('')")
+                        .HasMaxLength(25);
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
 
                     b.Property<string>("ExternalTransactionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Fee")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("int");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
@@ -508,11 +1795,140 @@ namespace LegitProduct.Data.Migrations
                     b.ToTable("AppUserTokens");
                 });
 
-            modelBuilder.Entity("LegitProduct.Data.Entities.Order", b =>
+            modelBuilder.Entity("LegitProduct.Data.Entities.AppUserAddress", b =>
                 {
                     b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("AppUserAddresses")
+                        .HasForeignKey("AppUserId")
+                        .HasConstraintName("FK_AppUserAddresses_AppUsers")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationDistrict", "LocationDistrict")
+                        .WithMany("AppUserAddresses")
+                        .HasForeignKey("LocationDistrictId")
+                        .HasConstraintName("FK_AppUserAddresses_LocationDistrict")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationProvince", "LocationProvince")
+                        .WithMany("AppUserAddresses")
+                        .HasForeignKey("LocationProvinceId")
+                        .HasConstraintName("FK_AppUserAddresses_LocationProvinces")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationVillage", "LocationVillage")
+                        .WithMany("AppUserAddresses")
+                        .HasForeignKey("LocationVillageId")
+                        .HasConstraintName("FK_AppUserAddresses_LocationVillage");
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationWard", "LocationWard")
+                        .WithMany("AppUserAddresses")
+                        .HasForeignKey("LocationWardId")
+                        .HasConstraintName("FK_AppUserAddresses_LocationWard")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.AppUserStore", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("AppUserStores")
+                        .HasForeignKey("AppUserId")
+                        .HasConstraintName("FK_AppUser_Stores_AppUsers")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Store", "Store")
+                        .WithMany("AppUserStores")
+                        .HasForeignKey("StoreId")
+                        .HasConstraintName("FK_AppUser_Stores_Stores")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Attribute", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("Attributes")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_Attributes_Products")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.AttributeValue", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Attribute", "Attribute")
+                        .WithMany("AttributeValues")
+                        .HasForeignKey("AttributeId")
+                        .HasConstraintName("FK_AttributeValues_Attributes")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.CollectionProduct", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Collection", "Collection")
+                        .WithMany("CollectionProducts")
+                        .HasForeignKey("CollectionId")
+                        .HasConstraintName("FK_Collection_Products_Collections")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("CollectionProducts")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_Collection_Products_Products")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Favorite", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Favorites")
+                        .HasForeignKey("AppUserId")
+                        .HasConstraintName("FK_Favorites_AppUsers")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("Favorites")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_Favorites_Products")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationDistrict", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.LocationProvince", "LocationProvince")
+                        .WithMany("LocationDistrict")
+                        .HasForeignKey("LocationProvinceId")
+                        .HasConstraintName("FK_LocationDistrict_LocationProvinces")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationVillage", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.LocationWard", "LocationWard")
+                        .WithMany("LocationVillage")
+                        .HasForeignKey("LocationWardId")
+                        .HasConstraintName("FK_LocationVillage_LocationWard")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.LocationWard", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.LocationDistrict", "LocationDistrict")
+                        .WithMany("LocationWard")
+                        .HasForeignKey("LocationDistrictId")
+                        .HasConstraintName("FK_LocationWard_LocationDistrict")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Order", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.AppUserAddress", "AppUserAddress")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AppUserAddressId")
+                        .HasConstraintName("FK_Orders_AppUserAddresses")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("AppUserId")
+                        .HasConstraintName("FK_Orders_AppUsers_UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -530,6 +1946,50 @@ namespace LegitProduct.Data.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.ProductPrice", "ProductPrice")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductPriceId")
+                        .HasConstraintName("FK_OrderDetails_ProductPrices");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Post", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Posts")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.PostCategory", "PostCategory")
+                        .WithMany("Posts")
+                        .HasForeignKey("PostCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.PostComment", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Post", "Post")
+                        .WithMany("PostComments")
+                        .HasForeignKey("PostId")
+                        .HasConstraintName("FK_PostComments_Posts")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.PostTag", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Post", "Post")
+                        .WithMany("PostTags")
+                        .HasForeignKey("PostId")
+                        .HasConstraintName("FK_Post_Tags_Posts")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Tag", "Tag")
+                        .WithMany("PostTags")
+                        .HasForeignKey("TagId")
+                        .HasConstraintName("FK_Post_Tags_Tags")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.Product", b =>
@@ -537,6 +1997,36 @@ namespace LegitProduct.Data.Migrations
                     b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
                         .WithMany("Products")
                         .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.ProductBranch", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Branch", "Branch")
+                        .WithMany("ProductBranches")
+                        .HasForeignKey("BranchId")
+                        .HasConstraintName("FK_Product_Branches_Branches")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("ProductBranches")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_Product_Branches_Products")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.ProductCategory", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Category", "Category")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.ProductImage", b =>
@@ -548,24 +2038,81 @@ namespace LegitProduct.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LegitProduct.Data.Entities.Product_Category", b =>
+            modelBuilder.Entity("LegitProduct.Data.Entities.ProductPrice", b =>
                 {
-                    b.HasOne("LegitProduct.Data.Entities.Category", "Category")
-                        .WithMany("Product_Category")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("LegitProduct.Data.Entities.AttributeValue", "AttributeValueId1Navigation")
+                        .WithMany("ProductPricesAttributeValueId1Navigation")
+                        .HasForeignKey("AttributeValueId1")
+                        .HasConstraintName("FK_ProductPrices_AttributeValues2");
+
+                    b.HasOne("LegitProduct.Data.Entities.AttributeValue", "AttributeValueId2Navigation")
+                        .WithMany("ProductPricesAttributeValueId2Navigation")
+                        .HasForeignKey("AttributeValueId2")
+                        .HasConstraintName("FK_ProductPrices_AttributeValues1");
+
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("ProductPrices")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_ProductPrices_Products")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.PromotionProduct", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.Product", "Product")
+                        .WithMany("PromotionProducts")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_Promotion_Products_Products")
+                        .IsRequired();
+
+                    b.HasOne("LegitProduct.Data.Entities.Promotion", "Promotion")
+                        .WithMany("PromotionProducts")
+                        .HasForeignKey("PromotionId")
+                        .HasConstraintName("FK_Promotion_Products_Promotions")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Rate", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Rates")
+                        .HasForeignKey("AppUserId")
+                        .HasConstraintName("FK_Rates_AppUsers")
                         .IsRequired();
 
                     b.HasOne("LegitProduct.Data.Entities.Product", "Product")
-                        .WithMany("Product_Category")
+                        .WithMany("Rates")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Rates_Products")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LegitProduct.Data.Entities.Store", b =>
+                {
+                    b.HasOne("LegitProduct.Data.Entities.LocationDistrict", "LocationDistrict")
+                        .WithMany("Stores")
+                        .HasForeignKey("LocationDistrictId")
+                        .HasConstraintName("FK_Stores_LocationDistrict");
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationProvince", "LocationProvince")
+                        .WithMany("Stores")
+                        .HasForeignKey("LocationProvinceId")
+                        .HasConstraintName("FK_Stores_LocationProvinces");
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationVillage", "LocationVillage")
+                        .WithMany("Stores")
+                        .HasForeignKey("LocationVillageId")
+                        .HasConstraintName("FK_Stores_LocationVillage");
+
+                    b.HasOne("LegitProduct.Data.Entities.LocationWard", "LocationWard")
+                        .WithMany("Stores")
+                        .HasForeignKey("LocationWardId")
+                        .HasConstraintName("FK_Stores_LocationWard");
                 });
 
             modelBuilder.Entity("LegitProduct.Data.Entities.Transaction", b =>
                 {
-                    b.HasOne("LegitProduct.Data.Entities.AppUser", "AppUser")
+                    b.HasOne("LegitProduct.Data.Entities.AppUser", "User")
                         .WithMany("Transactions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -13,7 +13,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Product.Dtos
         public string Description { get; set; }
         public int ViewCount { set; get; }
         public DateTime DateCreated { set; get; }
-        public List<Product_Category> Product_Category { get; set; }
+        public List<ProductCategory> Product_Category { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
         public List<Data.Entities.ProductImage> ProductImages { get; set; }
         public AppUser AppUser { get; set; }

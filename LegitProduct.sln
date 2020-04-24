@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LegitProduct.ApplicationLog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{F7DBE5C9-9076-4C18-846B-0D92B33E564C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd", "BackEnd\BackEnd.csproj", "{96693A4F-C248-43F7-B1B6-618783D46824}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.csproj", "{96693A4F-C248-43F7-B1B6-618783D46824}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

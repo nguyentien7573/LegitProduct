@@ -1,21 +1,28 @@
-﻿using LegitProduct.Data.ObjectEnums;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LegitProduct.Data.Entities
 {
-    public class Promotion
+    public partial class Promotion
     {
-        public int Id { set; get; }
-        public string Name { set; get; }
-        public DateTime FromDate { set; get; }
-        public DateTime ToDate { set; get; }
-        public bool ApplyForAll { set; get; }
-        public int? DiscountPercent { set; get; }
-        public decimal? DiscountAmount { set; get; }
-        public string ProductIds { set; get; }
-        public string ProductCategoryIds { set; get; }
-        public Status Status { set; get; }
+        public Promotion()
+        {
+            PromotionProducts = new HashSet<PromotionProduct>();
+        }
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+        public double? DiscountValue { get; set; }
+        public int? DiscountValueType { get; set; }
+        public int Status { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public int IsDeleted { get; set; }
+        public string CreatedUserId { get; set; }
+        public DateTime? DateDeleted { get; set; }
+
+        public virtual ICollection<PromotionProduct> PromotionProducts { get; set; }
     }
 }

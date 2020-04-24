@@ -10,27 +10,47 @@ namespace LegitProduct.Data.Configurations
 {
     public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<Order> builder)
+        public void Configure(EntityTypeBuilder<Order> entity)
         {
-            builder.ToTable("Orders");
+            entity.ToTable("Orders");
 
-            builder.HasKey(x => x.Id);
+            entity.HasIndex(e => e.AppUserId)
+                    .HasName("IX_Orders_UserId");
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            entity.Property(e => e.CreatedUserId)
+                .IsRequired()
+                .HasMaxLength(25)
+                .HasDefaultValueSql("('')");
 
-            builder.Property(x => x.OrderDate);
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
 
-            builder.Property(x => x.Email).IsRequired().IsUnicode(false).HasMaxLength(50);
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
 
-            builder.Property(x => x.Address).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
 
-            builder.Property(x => x.ShipNameMethod).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Email)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
-            builder.Property(x => x.PhoneNumber).IsRequired().HasMaxLength(12);
+            entity.Property(e => e.ShipNameMethod)
+                .IsRequired()
+                .HasMaxLength(255);
 
-            builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
+            entity.HasOne(d => d.AppUserAddress)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(d => d.AppUserAddressId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Orders_AppUserAddresses");
 
-            builder.Property(x => x.Status).HasDefaultValue(OrderStatus.Created);
+            entity.HasOne(d => d.AppUser)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(d => d.AppUserId)
+                .HasConstraintName("FK_Orders_AppUsers_UserId");
 
         }
     }

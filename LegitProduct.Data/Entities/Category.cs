@@ -1,16 +1,25 @@
-﻿using LegitProduct.Data.ObjectEnums;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LegitProduct.Data.Entities
 {
-    public class Category
+    public partial class Category
     {
-        public int Id { set; get; }
+        public Category()
+        {
+            ProductCategories = new HashSet<ProductCategory>();
+        }
+
+        public int Id { get; set; }
+        public int? ParentId { get; set; }
+        public int Status { get; set; }
         public string Name { get; set; }
-        public int? ParentId { set; get; }
-        public Status Status { set; get; }
-        public List<Product_Category> Product_Category { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public int IsDeleted { get; set; }
+        public string CreatedUserId { get; set; }
+        public DateTime? DateDeleted { get; set; }
+
+        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
     }
 }

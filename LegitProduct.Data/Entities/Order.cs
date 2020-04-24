@@ -1,21 +1,30 @@
-﻿using LegitProduct.Data.ObjectEnums;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LegitProduct.Data.Entities
-{
-    public class Order
+{     
+    public partial class Order
     {
-        public int Id { set; get; }
-        public DateTime OrderDate { set; get; }
-        public Guid UserId { set; get; }
-        public string ShipNameMethod { set; get; }
-        public string Address { set; get; }
-        public string Email { set; get; }
-        public string PhoneNumber { set; get; }
-        public OrderStatus Status { set; get; }
-        public List<OrderDetail> OrderDetails { get; set; }
-        public AppUser AppUser{get; set;}
+        public Order()
+        {
+            OrderDetails = new HashSet<OrderDetail>();
+        }
+
+        public int Id { get; set; }
+        public DateTime OrderDate { get; set; }
+        public Guid AppUserId { get; set; }
+        public string ShipNameMethod { get; set; }
+        public string Email { get; set; }
+        public int Status { get; set; }
+        public int AppUserAddressId { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public int IsDeleted { get; set; }
+        public string CreatedUserId { get; set; }
+        public DateTime? DateDeleted { get; set; }
+
+        public virtual AppUser AppUser { get; set; }
+        public virtual AppUserAddress AppUserAddress { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

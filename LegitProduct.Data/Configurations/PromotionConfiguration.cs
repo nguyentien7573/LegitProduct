@@ -9,17 +9,26 @@ namespace LegitProduct.Data.Configurations
 {
     public class PromotionConfiguration : IEntityTypeConfiguration<Promotion>
     {
-        public void Configure(EntityTypeBuilder<Promotion> builder)
+        public void Configure(EntityTypeBuilder<Promotion> entity)
         {
-            builder.ToTable("Promotions");
+            entity.ToTable("Promotions");
 
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
+            entity.Property(e => e.CreatedUserId)
+                   .IsRequired()
+                   .HasMaxLength(25)
+                   .HasDefaultValueSql("('')");
 
-            builder.Property(x => x.Name).IsRequired();
-            builder.Property(x => x.FromDate).IsRequired();
-            builder.Property(x => x.ToDate).IsRequired();
-            builder.Property(x => x.ApplyForAll).IsRequired();
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
+
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Name).IsRequired();
         }
     }
 }

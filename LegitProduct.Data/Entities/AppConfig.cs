@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LegitProduct.Data.Entities
 {
-    public class AppConfig
+    public partial class AppConfig
     {
         public string Key { get; set; }
         public string Value { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public int IsDeleted { get; set; }
+        public string CreatedUserId { get; set; }
+        public DateTime? DateDeleted { get; set; }
     }
 }

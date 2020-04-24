@@ -9,16 +9,29 @@ namespace LegitProduct.Data.Configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Product> entity)
         {
-            builder.ToTable("Products");
+            entity.ToTable("Products");
+            
+            entity.HasIndex(e => e.AppUserId);
 
-            builder.HasKey(x => x.Id);
+            entity.Property(e => e.CreatedUserId)
+                .IsRequired()
+                .HasMaxLength(25);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
-            builder.Property(x => x.Price).IsRequired();
-            builder.Property(x => x.ViewCount).IsRequired().HasDefaultValue(0);
-            builder.Property(x => x.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("('2020-04-18T20:38:14.7450280+07:00')");
+
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
+
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+
+            entity.HasOne(d => d.AppUser)
+                .WithMany(p => p.Products)
+                .HasForeignKey(d => d.AppUserId);
         }
     }
 }

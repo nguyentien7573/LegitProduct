@@ -9,11 +9,30 @@ namespace LegitProduct.Data.Configurations
 {
     public class AppRoleConfiguration : IEntityTypeConfiguration<AppRole>
     {
-        public void Configure(EntityTypeBuilder<AppRole> builder)
+        public void Configure(EntityTypeBuilder<AppRole> entity)
         {
-            builder.ToTable("AppRoles");
+            entity.ToTable("AppRoles");
 
-            builder.Property(x => x.Description).HasMaxLength(255).IsRequired();
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.Property(e => e.CreatedUserId)
+                .IsRequired()
+                .HasMaxLength(25)
+                .HasDefaultValueSql("('')");
+
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
+
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Description)
+                .IsRequired()
+                .HasMaxLength(255);
         }
     }
 }

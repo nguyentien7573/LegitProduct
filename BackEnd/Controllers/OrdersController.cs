@@ -14,9 +14,9 @@ namespace BackEnd.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly LegitProductDBContext _context;
+        private readonly LegitProduct.Data.EF.LegitProductDBContext _context;
 
-        public OrdersController(LegitProductDBContext context)
+        public OrdersController(LegitProduct.Data.EF.LegitProductDBContext context)
         {
             _context = context;
         }

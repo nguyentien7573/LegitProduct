@@ -110,7 +110,7 @@ namespace LegitProduct.ApplicationLogic.Catalog.Product
             }
 
             var query = from p in context.Products
-                        join pc in context.ProductInCategories on p.Id equals pc.ProductId
+                        join pc in context.ProductCategories on p.Id equals pc.ProductId
                         join ca in context.Categories on pc.CategoryId equals ca.Id
                         select new { p,pc };
 
@@ -129,10 +129,10 @@ namespace LegitProduct.ApplicationLogic.Catalog.Product
                     Price = x.p.Price,
                     Description = x.p.Description,
                     AppUser = x.p.AppUser,
-                    OrderDetails = x.p.OrderDetails,
-                    ProductImages = x.p.ProductImages,
+                    OrderDetails = x.p.OrderDetails.ToList(),
+                    ProductImages = x.p.ProductImages.ToList(),
                     DateCreated = x.p.DateCreated,
-                    Product_Category = x.p.Product_Category,
+                    Product_Category = x.p.ProductCategories.ToList(),
                     ViewCount = x.p.ViewCount,
                 }).ToListAsync();
 
@@ -156,10 +156,10 @@ namespace LegitProduct.ApplicationLogic.Catalog.Product
                 DateCreated = product.DateCreated,
                 Id = product.Id,
                 Name = product.Name,
-                OrderDetails = product.OrderDetails,
+                OrderDetails = product.OrderDetails.ToList(),
                 Price = product.Price,
-                ProductImages = product.ProductImages,
-                Product_Category = product.Product_Category,
+                ProductImages = product.ProductImages.ToList(),
+                Product_Category = product.ProductCategories.ToList(),
                 ViewCount = product.ViewCount
             };
             return productViewModel;

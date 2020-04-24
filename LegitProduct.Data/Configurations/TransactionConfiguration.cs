@@ -10,15 +10,34 @@ namespace LegitProduct.Data.Configurations
 {
     public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {
-        public void Configure(EntityTypeBuilder<Transaction> builder)
+        public void Configure(EntityTypeBuilder<Transaction> entity)
         {
-            builder.ToTable("Transactions");
+            entity.ToTable("Transactions");
 
-            builder.HasKey(x => x.Id);
+            entity.HasIndex(e => e.UserId);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
 
-            builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);
+            entity.Property(e => e.CreatedUserId)
+                .IsRequired()
+                .HasMaxLength(25)
+                .HasDefaultValueSql("('')");
+
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
+
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Fee).HasColumnType("decimal(18, 2)");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Transactions)
+                .HasForeignKey(d => d.UserId);
 
         }
     }

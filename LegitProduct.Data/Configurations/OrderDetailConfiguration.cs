@@ -9,17 +9,43 @@ namespace LegitProduct.Data.Configurations
 {
     public class OrderDetailConfiguration : IEntityTypeConfiguration<OrderDetail>
     {
-        public void Configure(EntityTypeBuilder<OrderDetail> builder)
+        public void Configure(EntityTypeBuilder<OrderDetail> entity)
         {
-            builder.ToTable("OrderDetails");
+            entity.ToTable("OrderDetails");
 
-            builder.HasKey(x => new { x.OrderId, x.ProductId });
+            entity.HasKey(e => new { e.OrderId, e.ProductId });
 
-            builder.Property(x => x.Quantity).IsRequired();
-            builder.Property(x => x.Price).IsRequired();
+            entity.HasIndex(e => e.ProductId);
 
-            builder.HasOne(x => x.Order).WithMany(x => x.OrderDetails).HasForeignKey(x => x.OrderId);
-            builder.HasOne(x => x.Product).WithMany(x => x.OrderDetails).HasForeignKey(x => x.ProductId);
+            entity.Property(e => e.CreatedUserId)
+                .IsRequired()
+                .HasMaxLength(25)
+                .HasDefaultValueSql("('')");
+
+            entity.Property(e => e.DateCreated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.DateDeleted).HasColumnType("datetime");
+
+            entity.Property(e => e.DateUpdated)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+
+            entity.HasOne(d => d.Order)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId);
+
+            entity.HasOne(d => d.Product)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.ProductId);
+
+            entity.HasOne(d => d.ProductPrice)
+                .WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.ProductPriceId)
+                .HasConstraintName("FK_OrderDetails_ProductPrices");
         }
     }
 }

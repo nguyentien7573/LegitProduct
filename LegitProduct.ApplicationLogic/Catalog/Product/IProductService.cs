@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using LegitProduct.ApplicationLogic.Catalog.ProductImage;
-using LegitProduct.ApplicationLogic.Catalog.ProductImage.Dtos;
+
 
 namespace LegitProduct.ApplicationLogic.Catalog.Product
 {

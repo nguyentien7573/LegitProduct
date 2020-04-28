@@ -1,17 +1,16 @@
-﻿using System;
+﻿using LegitProduct.Data.Entities.Common;
+using System;
 using System.Collections.Generic;
 
 namespace LegitProduct.Data.Entities
 {
-    public partial class Store
+    public class Store : BaseEntity
     {
         public Store()
         {
             AppUserStores = new HashSet<AppUserStore>();
         }
 
-        public int Id { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
         public string BusinessLicense { get; set; }
@@ -23,11 +22,6 @@ namespace LegitProduct.Data.Entities
         public int? LocationDistrictId { get; set; }
         public int? LocationWardId { get; set; }
         public int? LocationVillageId { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
-        public int IsDeleted { get; set; }
-        public string CreatedUserId { get; set; }
-        public DateTime? DateDeleted { get; set; }
 
         public virtual LocationDistrict LocationDistrict { get; set; }
         public virtual LocationProvince LocationProvince { get; set; }

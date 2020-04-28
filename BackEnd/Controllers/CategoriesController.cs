@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using LegitProduct.Data.EF;
 using LegitProduct.Data.Entities;
 using LegitProduct.ApplicationLogic.Catalog.Category;
-using LegitProduct.ApplicationLogic.Catalog.Category.Dtos;
 using LegitProduct.ApplicationLogic.Common;
 
 namespace BackEnd.Controllers
@@ -37,11 +36,11 @@ namespace BackEnd.Controllers
             return Ok(category);
         }
 
-        [HttpGet]
-        public async Task<PageResult<CategoryViewModel>> GetPaging([FromQuery]CategoryPagingRequest request)
-        {
-            return await _categoryService.GetPaging(request);
-        }
+        //[HttpGet]
+        //public async Task<PageResult<CategoryViewModel>> GetPaging([FromQuery]CategoryPagingRequest request)
+        //{
+        //    return await _categoryService.GetPaging(request);
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromForm]CategoryUpdateRequest request)
@@ -55,7 +54,7 @@ namespace BackEnd.Controllers
                 return BadRequest();
             return Ok();
         }
-      
+
         [HttpPost]
         public async Task<ActionResult<Category>> Create([FromForm]CategoryCreateRequest request)
         {
@@ -71,6 +70,7 @@ namespace BackEnd.Controllers
 
             return CreatedAtAction(nameof(GetByID), new { id = categoryId }, category);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

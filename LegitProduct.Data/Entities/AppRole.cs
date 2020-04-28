@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 
 namespace LegitProduct.Data.Entities
 {
-    public partial class AppRole : IdentityRole<Guid>
+    public class AppRole : IdentityRole<Guid>
     {
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }

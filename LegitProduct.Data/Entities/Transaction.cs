@@ -1,11 +1,11 @@
-﻿using System;
+﻿using LegitProduct.Data.Entities.Common;
+using System;
 using System.Collections.Generic;
 
 namespace LegitProduct.Data.Entities
 {
-    public partial class Transaction
+    public class Transaction : BaseEntity
     {
-        public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ExternalTransactionId { get; set; }
         public decimal Amount { get; set; }
@@ -15,11 +15,6 @@ namespace LegitProduct.Data.Entities
         public int Status { get; set; }
         public string Provider { get; set; }
         public Guid UserId { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
-        public int IsDeleted { get; set; }
-        public string CreatedUserId { get; set; }
-        public DateTime? DateDeleted { get; set; }
 
         public virtual AppUser User { get; set; }
     }

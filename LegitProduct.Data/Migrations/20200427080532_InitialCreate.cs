@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LegitProduct.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,12 +12,14 @@ namespace LegitProduct.Data.Migrations
                 columns: table => new
                 {
                     Key = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Value = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,13 +161,13 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 255, nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    ImagePath = table.Column<string>(maxLength: 200, nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ImagePath = table.Column<string>(maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,14 +180,14 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ParentId = table.Column<int>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 250, nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "0"),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    ParentId = table.Column<int>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,13 +201,13 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 500, nullable: true),
-                    Desciption = table.Column<string>(type: "text", nullable: true),
-                    ImagePath = table.Column<string>(maxLength: 200, nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Desciption = table.Column<string>(type: "text", nullable: true),
+                    ImagePath = table.Column<string>(maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -220,9 +222,9 @@ namespace LegitProduct.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -236,15 +238,16 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     TableName = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
                     AppUserId = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
                     Action = table.Column<string>(maxLength: 50, nullable: true),
-                    Desciption = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    Desciption = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -259,9 +262,9 @@ namespace LegitProduct.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 500, nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -276,16 +279,16 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     FromDate = table.Column<DateTime>(nullable: false),
                     ToDate = table.Column<DateTime>(nullable: false),
                     DiscountValue = table.Column<double>(nullable: true),
                     DiscountValueType = table.Column<int>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -299,10 +302,10 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -317,18 +320,18 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "('2020-04-18T20:38:14.7450280+07:00')"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ViewCount = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "('2020-04-18T20:38:14.7450280+07:00')"),
                     AppUserId = table.Column<Guid>(nullable: true),
                     StoreId = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    IsApprove = table.Column<int>(nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsApprove = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -347,6 +350,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ExternalTransactionId = table.Column<string>(nullable: true),
                     Amount = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
@@ -355,12 +364,7 @@ namespace LegitProduct.Data.Migrations
                     Message = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     Provider = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -380,12 +384,12 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
-                    LocationProvinceId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    LocationProvinceId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -404,16 +408,15 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    PostContent = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     AppUserId = table.Column<Guid>(nullable: false),
                     Summary = table.Column<string>(nullable: true),
                     IsActive = table.Column<int>(nullable: false),
-                    PostCategoryId = table.Column<int>(nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    PostCategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -439,12 +442,12 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: true),
-                    ProductId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -463,10 +466,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false),
                     CollectionId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -492,10 +497,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false),
                     AppUserId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -521,10 +528,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false),
                     BranchId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -550,10 +559,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -579,14 +590,15 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     ProductId = table.Column<int>(nullable: false),
                     ImagePath = table.Column<string>(maxLength: 200, nullable: false),
-                    IsDefault = table.Column<bool>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDefault = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -605,10 +617,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false),
                     PromotionId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -634,15 +648,16 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     Rating = table.Column<double>(nullable: false),
                     Feedback = table.Column<string>(type: "text", nullable: true),
                     ProductId = table.Column<int>(nullable: false),
-                    AppUserId = table.Column<Guid>(nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    AppUserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -668,12 +683,12 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
-                    LocationDistrictId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    LocationDistrictId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -692,10 +707,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     TagId = table.Column<int>(nullable: false),
                     PostId = table.Column<int>(nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -721,13 +738,14 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CommentContent = table.Column<string>(type: "text", nullable: true),
-                    PostId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    CommentContent = table.Column<string>(type: "text", nullable: true),
+                    PostId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -746,14 +764,15 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     AttributeId = table.Column<int>(nullable: false),
                     Value = table.Column<string>(maxLength: 50, nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -773,12 +792,12 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
-                    LocationWardId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
+                    LocationWardId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -797,16 +816,17 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     ProductId = table.Column<int>(nullable: false),
                     AttributeValueId1 = table.Column<int>(nullable: true),
                     AttributeValueId2 = table.Column<int>(nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18, 0)", nullable: false),
-                    PriceSell = table.Column<decimal>(type: "decimal(18, 0)", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    PriceSell = table.Column<decimal>(type: "decimal(18, 0)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -837,18 +857,19 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     Address = table.Column<string>(maxLength: 500, nullable: false),
                     LocationProvinceId = table.Column<int>(nullable: false),
                     LocationDistrictId = table.Column<int>(nullable: false),
                     LocationWardId = table.Column<int>(nullable: false),
                     LocationVillageId = table.Column<int>(nullable: true),
                     AppUserId = table.Column<Guid>(nullable: false),
-                    PhoneNumber = table.Column<string>(fixedLength: true, maxLength: 12, nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    PhoneNumber = table.Column<string>(fixedLength: true, maxLength: 12, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -892,6 +913,11 @@ namespace LegitProduct.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 250, nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     ImagePath = table.Column<string>(maxLength: 250, nullable: true),
                     BusinessLicense = table.Column<string>(maxLength: 250, nullable: true),
@@ -902,12 +928,7 @@ namespace LegitProduct.Data.Migrations
                     LocationProvinceId = table.Column<int>(nullable: true),
                     LocationDistrictId = table.Column<int>(nullable: true),
                     LocationWardId = table.Column<int>(nullable: true),
-                    LocationVillageId = table.Column<int>(nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    LocationVillageId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -944,17 +965,18 @@ namespace LegitProduct.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     OrderDate = table.Column<DateTime>(nullable: false),
                     AppUserId = table.Column<Guid>(nullable: false),
                     ShipNameMethod = table.Column<string>(maxLength: 255, nullable: false),
                     Email = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    AppUserAddressId = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    AppUserAddressId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -979,10 +1001,12 @@ namespace LegitProduct.Data.Migrations
                 {
                     StoreId = table.Column<int>(nullable: false),
                     AppUserId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -1008,14 +1032,16 @@ namespace LegitProduct.Data.Migrations
                 {
                     OrderId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    ProductPriceId = table.Column<int>(nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateUpdated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    IsDeleted = table.Column<int>(nullable: false),
-                    CreatedUserId = table.Column<string>(maxLength: 25, nullable: false, defaultValueSql: "('')"),
-                    DateDeleted = table.Column<DateTime>(type: "datetime", nullable: true)
+                    ProductPriceId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
